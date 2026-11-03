@@ -1,0 +1,568 @@
+/* ==========================================================================
+   웹 명함 CSS 스타일시트 (style.css)
+   테마: 모던 글래스모피즘 & 네오-디지털 바이브
+   ========================================================================== */
+
+:root {
+  /* 다크 테마 기본 변수 (기본값) */
+  --bg-color: #0c0f17;
+  --card-bg: rgba(23, 28, 43, 0.72);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55),
+                 0 0 40px rgba(99, 102, 241, 0.15);
+  
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --text-muted: #64748b;
+  
+  --primary-accent: #6366f1;
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --secondary-accent: #38bdf8;
+  
+  --badge-bg: rgba(99, 102, 241, 0.15);
+  --badge-border: rgba(99, 102, 241, 0.3);
+  --badge-text: #a5b4fc;
+
+  --box-bg: rgba(15, 23, 42, 0.65);
+  --box-border: rgba(255, 255, 255, 0.08);
+
+  --orb-1: #4f46e5;
+  --orb-2: #ec4899;
+  --orb-3: #06b6d4;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 라이트 테마 변수 */
+body.light-theme {
+  --bg-color: #f1f5f9;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --card-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.12),
+                 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --text-muted: #94a3b8;
+
+  --badge-bg: rgba(99, 102, 241, 0.1);
+  --badge-border: rgba(99, 102, 241, 0.25);
+  --badge-text: #4f46e5;
+
+  --box-bg: rgba(248, 250, 252, 0.85);
+  --box-border: rgba(226, 232, 240, 0.9);
+
+  --orb-1: #818cf8;
+  --orb-2: #f472b6;
+  --orb-3: #38bdf8;
+}
+
+/* 리셋 & 전역 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 24px 16px;
+  transition: background-color var(--transition-normal);
+}
+
+/* 감각적인 배경 네온 블러 구체 효과 */
+.bg-blur-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--orb-1);
+  top: -60px;
+  left: -80px;
+}
+
+.orb-2 {
+  width: 340px;
+  height: 340px;
+  background: var(--orb-2);
+  bottom: -60px;
+  right: -60px;
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 280px;
+  height: 280px;
+  background: var(--orb-3);
+  top: 45%;
+  left: 65%;
+  animation-duration: 25s;
+  animation-delay: -9s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.1); }
+  100% { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+/* 메인 컨테이너 (3D Perspective 래퍼) */
+.card-container {
+  position: relative;
+  z-index: 1;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* 명함 카드 본체 */
+.business-card {
+  width: 100%;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  box-shadow: var(--card-shadow);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease-out, box-shadow var(--transition-normal), background var(--transition-normal);
+  transform-style: preserve-3d;
+}
+
+/* 카드 상단 헤더 */
+.card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--badge-text);
+  letter-spacing: -0.01em;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+/* 테마 토글 버튼 */
+.icon-btn {
+  background: var(--box-bg);
+  border: 1px solid var(--box-border);
+  color: var(--text-main);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.95rem;
+}
+
+.icon-btn:hover {
+  transform: rotate(20deg) scale(1.08);
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+}
+
+/* 캐릭터 아바타 영역 */
+.avatar-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 22px;
+}
+
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+  background: var(--primary-gradient);
+  filter: blur(28px);
+  border-radius: 50%;
+  opacity: 0.55;
+  animation: glowPulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.4; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+}
+
+.avatar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--box-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: avatarFloat 4.5s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.character-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 캐릭터 애니메이션: 눈 깜빡임 */
+.eyes-group {
+  transform-origin: 100px 99px;
+  animation: eyeBlink 4.2s infinite ease-in-out;
+}
+
+@keyframes eyeBlink {
+  0%, 94%, 98%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* 캐릭터 애니메이션: 헤드폰 음악 바이브 파동 */
+.vibe-wave-1 {
+  animation: wavePulse 1.4s ease-in-out infinite;
+}
+
+.vibe-wave-2 {
+  animation: wavePulse 1.4s ease-in-out infinite 0.35s;
+}
+
+@keyframes wavePulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.9); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+/* 프로필 기본 정보 */
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.en-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.job-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.job-role i {
+  -webkit-text-fill-color: initial;
+  color: var(--primary-accent);
+  font-size: 0.9rem;
+}
+
+.tagline {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-sub);
+  word-break: keep-all;
+  font-weight: 400;
+}
+
+/* 스킬 태그 뱃지 */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.skill-tag {
+  background: var(--box-bg);
+  border: 1px solid var(--box-border);
+  color: var(--text-sub);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition-fast);
+}
+
+.skill-tag i {
+  color: var(--primary-accent);
+  font-size: 0.8rem;
+}
+
+.skill-tag:hover {
+  border-color: var(--primary-accent);
+  color: var(--text-main);
+  transform: translateY(-2px);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+/* 연락처 이메일 박스 */
+.contact-box {
+  width: 100%;
+  background: var(--box-bg);
+  border: 1px solid var(--box-border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+.email-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.email-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.email-info .icon {
+  color: var(--primary-accent);
+  font-size: 1rem;
+}
+
+.email-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-main);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.copy-btn {
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid var(--badge-border);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+  background: var(--primary-accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* 카드 하단 액션 버튼 그룹 */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 14px;
+  padding: 12px 18px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  font-family: inherit;
+}
+
+.primary-btn {
+  flex: 1.2;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.primary-btn:hover {
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  flex: 1;
+  background: var(--box-bg);
+  border: 1px solid var(--box-border);
+  color: var(--text-main);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--card-border);
+  transform: translateY(-2px);
+}
+
+.icon-only-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--box-bg);
+  border: 1px solid var(--box-border);
+  color: var(--text-main);
+  border-radius: 14px;
+}
+
+.icon-only-btn:hover {
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+  transform: translateY(-2px);
+}
+
+/* 푸터 워터마크 */
+.card-footer {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* 복사 안내 토스트 */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast i {
+  color: #10b981;
+}
+
+/* 반응형 모바일 최적화 */
+@media (max-width: 480px) {
+  .business-card {
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+  
+  .name {
+    font-size: 1.55rem;
+  }
+  
+  .email-text {
+    font-size: 0.8rem;
+  }
+
+  .action-btn {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+  }
+}
+

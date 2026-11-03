@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김달용 | 바이브코딩 풀스택 개발자 웹 명함</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 배경 데코레이션 블러 구체들 -->
+  <div class="bg-blur-orb orb-1"></div>
+  <div class="bg-blur-orb orb-2"></div>
+  <div class="bg-blur-orb orb-3"></div>
+
+  <main class="card-container">
+    <!-- 3D 틸트 효과가 들어가는 카드 본체 -->
+    <div class="business-card" id="card">
+      
+      <!-- 상단 바이브 상태 표시 태그 & 테마 토글 버튼 -->
+      <div class="card-header">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span class="status-text">Vibing & Coding ✨</span>
+        </div>
+        <button id="themeToggleBtn" class="icon-btn" title="테마 변경" aria-label="테마 변경">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 얼굴 캐릭터 일러스트레이션 (SVG) -->
+      <div class="avatar-wrapper">
+        <div class="avatar-glow"></div>
+        <div class="avatar-container">
+          <!-- 개발자 캐릭터 SVG -->
+          <svg class="character-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFDFC4" />
+                <stop offset="100%" stop-color="#F3C3A0" />
+              </linearGradient>
+              <linearGradient id="hairGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2D3748" />
+                <stop offset="100%" stop-color="#1A202C" />
+              </linearGradient>
+              <linearGradient id="hoodieGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4F46E5" />
+                <stop offset="100%" stop-color="#7C3AED" />
+              </linearGradient>
+              <linearGradient id="headphoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#06B6D4" />
+                <stop offset="100%" stop-color="#3B82F6" />
+              </linearGradient>
+              <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.15" />
+              </filter>
+            </defs>
+
+            <!-- 몸체 / 후드티 -->
+            <path d="M45 175 C45 145, 65 130, 100 130 C135 130, 155 145, 155 175 L165 200 L35 200 Z" fill="url(#hoodieGrad)" filter="url(#softShadow)" />
+            <!-- 목라인 -->
+            <path d="M85 130 C85 142, 115 142, 115 130 Z" fill="#E2B18E" />
+            <!-- 후드 끈 -->
+            <path d="M88 140 L88 165" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+            <path d="M112 140 L112 165" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+
+            <!-- 헤드폰 밴드 (머리 뒤) -->
+            <path d="M48 95 C46 50, 154 50, 152 95" stroke="url(#headphoneGrad)" stroke-width="8" stroke-linecap="round" />
+
+            <!-- 목 -->
+            <rect x="88" y="115" width="24" height="20" rx="6" fill="#F3C3A0" />
+
+            <!-- 얼굴 본체 -->
+            <rect x="62" y="65" width="76" height="72" rx="36" fill="url(#skinGrad)" filter="url(#softShadow)" />
+
+            <!-- 귀 (좌, 우) -->
+            <circle cx="61" cy="100" r="9" fill="#F3C3A0" />
+            <circle cx="139" cy="100" r="9" fill="#F3C3A0" />
+
+            <!-- 뒷머리 -->
+            <path d="M60 90 C58 55, 142 55, 140 90 Z" fill="url(#hairGrad)" />
+            
+            <!-- 앞머리 스타일링 -->
+            <path d="M58 85 C65 65, 85 62, 105 66 C120 70, 138 68, 142 85 C132 80, 120 82, 110 82 C95 82, 85 86, 75 88 Z" fill="url(#hairGrad)" />
+
+            <!-- 눈썹 -->
+            <path d="M75 89 C80 86, 88 87, 91 89" stroke="#1A202C" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M109 89 C112 87, 120 86, 125 89" stroke="#1A202C" stroke-width="2.5" stroke-linecap="round" />
+
+            <!-- 눈 (깜빡임 애니메이션 적용 클래스) -->
+            <g class="eyes-group">
+              <ellipse cx="83" cy="99" rx="4" ry="5.5" fill="#1A202C" />
+              <circle cx="84.5" cy="97" r="1.8" fill="#FFFFFF" />
+              <ellipse cx="117" cy="99" rx="4" ry="5.5" fill="#1A202C" />
+              <circle cx="118.5" cy="97" r="1.8" fill="#FFFFFF" />
+            </g>
+
+            <!-- 안경 프레임 -->
+            <g class="glasses-group" stroke="#1E293B" stroke-width="2.8" fill="rgba(255,255,255,0.25)">
+              <rect x="71" y="89" width="24" height="20" rx="6" />
+              <rect x="105" y="89" width="24" height="20" rx="6" />
+              <line x1="95" y1="99" x2="105" y2="99" />
+              <line x1="61" y1="96" x2="71" y2="96" />
+              <line x1="129" y1="96" x2="139" y2="96" />
+            </g>
+
+            <!-- 안경 빛반사 하이라이트 -->
+            <path d="M75 92 L81 92" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.7" />
+            <path d="M109 92 L115 92" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.7" />
+
+            <!-- 볼터치 (홍조) -->
+            <ellipse cx="73" cy="111" rx="6" ry="3.5" fill="#F87171" opacity="0.35" />
+            <ellipse cx="127" cy="111" rx="6" ry="3.5" fill="#F87171" opacity="0.35" />
+
+            <!-- 코 & 미소 짓는 입 -->
+            <circle cx="100" cy="106" r="2" fill="#E2B18E" />
+            <path d="M94 116 Q100 124 106 116" stroke="#C2410C" stroke-width="2.5" stroke-linecap="round" fill="none" />
+
+            <!-- 헤드폰 이어컵 (좌, 우) -->
+            <rect x="42" y="85" width="12" height="30" rx="6" fill="url(#headphoneGrad)" filter="url(#softShadow)" />
+            <rect x="146" y="85" width="12" height="30" rx="6" fill="url(#headphoneGrad)" filter="url(#softShadow)" />
+            <rect x="46" y="90" width="4" height="20" rx="2" fill="#E2E8F0" opacity="0.6" />
+            <rect x="150" y="90" width="4" height="20" rx="2" fill="#E2E8F0" opacity="0.6" />
+
+            <!-- 헤드폰 음파 바이브 그래픽 효과 -->
+            <g class="sound-vibes">
+              <path d="M35 94 C33 97, 33 103, 35 106" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" class="vibe-wave-1" />
+              <path d="M29 90 C25 96, 25 104, 29 110" stroke="#818CF8" stroke-width="2" stroke-linecap="round" class="vibe-wave-2" />
+              <path d="M165 94 C167 97, 167 103, 165 106" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" class="vibe-wave-1" />
+              <path d="M171 90 C175 96, 175 104, 171 110" stroke="#818CF8" stroke-width="2" stroke-linecap="round" class="vibe-wave-2" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 기본 프로필 정보 -->
+      <div class="profile-info">
+        <h1 class="name">김달용 <span class="en-name">Kim Dal-yong</span></h1>
+        <div class="job-role">
+          <i class="fa-solid fa-code"></i>
+          <span>바이브코딩 풀스택 개발자</span>
+        </div>
+        <p class="tagline">
+          "아이디어를 유려한 코드로 실현하며,<br>바이브 넘치는 사용자 경험을 만들어갑니다 🚀"
+        </p>
+      </div>
+
+      <!-- 기술 스택 키워드 뱃지 -->
+      <div class="skills-container">
+        <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+        <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+        <span class="skill-tag"><i class="fa-brands fa-react"></i> React</span>
+        <span class="skill-tag"><i class="fa-brands fa-node"></i> Node.js</span>
+        <span class="skill-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Vibe Coding</span>
+      </div>
+
+      <!-- 연락처 및 이메일 섹션 -->
+      <div class="contact-box">
+        <div class="email-row">
+          <div class="email-info">
+            <i class="fa-solid fa-envelope icon"></i>
+            <span class="email-text" id="emailText">kdy1227kr@gmail.com</span>
+          </div>
+          <button id="copyEmailBtn" class="copy-btn" title="이메일 복사하기">
+            <i class="fa-regular fa-copy"></i>
+            <span class="btn-tooltip">복사</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 카드 하단 액션 버튼들 -->
+      <div class="card-actions">
+        <a href="mailto:kdy1227kr@gmail.com" class="action-btn primary-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>메일 보내기</span>
+        </a>
+        <button id="saveContactBtn" class="action-btn secondary-btn">
+          <i class="fa-solid fa-address-card"></i>
+          <span>연락처 저장</span>
+        </button>
+        <button id="shareBtn" class="action-btn icon-only-btn" title="명함 링크 공유">
+          <i class="fa-solid fa-share-nodes"></i>
+        </button>
+      </div>
+
+      <!-- 카드 하단 워터마크 -->
+      <footer class="card-footer">
+        <span>© 2026 Kim Dal-yong • All Rights Reserved</span>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- 복사 완료 토스트 알림 메시지 -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">클립보드에 복사되었습니다!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
